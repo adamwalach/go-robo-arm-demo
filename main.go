@@ -24,7 +24,7 @@ func main() {
 	bus := embd.NewI2CBus(1)
 
 	d := pca9685.New(bus, 0x40)
-	d.Freq = 50
+	d.Freq = 60
 	defer d.Close()
 
 	vertCtl := NewController(
