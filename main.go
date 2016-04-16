@@ -32,8 +32,8 @@ func main() {
 		CtlSettings{
 			Value: 90,
 			Step:  1,
-			Max:   200,
-			Min:   20,
+			Max:   175,
+			Min:   1,
 		})
 	horCtl := NewController(
 		servo.New(d.ServoChannel(3)),
@@ -63,12 +63,12 @@ func main() {
 		case AsciiS:
 			vertCtl.Dec()
 		case AsciiA:
-			horCtl.Dec()
-		case AsciiD:
 			horCtl.Inc()
+		case AsciiD:
+			horCtl.Dec()
 		}
 
-		switch ascii {
+		switch keyCode {
 		case CodeUpArrow:
 			gripCtl.Inc()
 		case CodeDownArrow:
