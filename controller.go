@@ -24,6 +24,7 @@ func NewController(servo *servo.Servo, settings CtlSettings) *Controller {
 		Servo:    servo,
 		Settings: settings,
 	}
+	s.Set(settings.Value)
 	return s
 }
 
