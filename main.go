@@ -30,7 +30,7 @@ func main() {
 	vertCtl := NewController(
 		servo.New(d.ServoChannel(2)),
 		CtlSettings{
-			Value: 90,
+			Value: 85,
 			Step:  1,
 			Max:   175,
 			Min:   1,
@@ -38,7 +38,7 @@ func main() {
 	horCtl := NewController(
 		servo.New(d.ServoChannel(3)),
 		CtlSettings{
-			Value: 90,
+			Value: 95,
 			Step:  1,
 			Max:   200,
 			Min:   20,
@@ -46,7 +46,7 @@ func main() {
 	gripCtl := NewController(
 		servo.New(d.ServoChannel(0)),
 		CtlSettings{
-			Value: 90,
+			Value: 110,
 			Step:  1,
 			Max:   184,
 			Min:   105,
