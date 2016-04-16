@@ -48,8 +48,8 @@ func main() {
 		CtlSettings{
 			Value: 90,
 			Step:  1,
-			Max:   200,
-			Min:   20,
+			Max:   184,
+			Min:   105,
 		})
 
 	for {
