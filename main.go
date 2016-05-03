@@ -9,11 +9,6 @@ import (
 	"github.com/kidoman/embd/motion/servo"
 )
 
-var (
-	servoMin = 400
-	servoMax = 600
-)
-
 func main() {
 
 	if err := embd.InitI2C(); err != nil {
