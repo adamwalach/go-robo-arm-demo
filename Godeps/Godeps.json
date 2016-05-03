@@ -1,0 +1,18 @@
+{
+	"ImportPath": "github.com/adamwalach/go-robo-arm-demo",
+	"GoVersion": "go1.6",
+	"Deps": [
+		{
+			"ImportPath": "github.com/golang/glog",
+			"Rev": "23def4e6c14b4da8ac2ed8007337bc5eb5007998"
+		},
+		{
+			"ImportPath": "github.com/kidoman/embd",
+			"Rev": "bfcd1345fe4e3d17ca82475c0c2f3d53120f87a9"
+		},
+		{
+			"ImportPath": "github.com/pkg/term",
+			"Rev": "9eb92a42e2b9dd9bc2bdb0a1d0f085c49233b6d4"
+		}
+	]
+}
