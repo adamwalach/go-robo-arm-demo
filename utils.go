@@ -4,8 +4,6 @@ import (
 	"github.com/pkg/term"
 )
 
-type Code uint32
-
 const (
 	CodeRightArrow int = 39
 	CodeLeftArrow  int = 37
