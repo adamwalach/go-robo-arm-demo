@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	ctl "github.com/adamwalach/go-robo-arm-demo/servoctl"
-	keys "github.com/adamwalach/go-robo-arm-demo/servoctl"
+	keys "github.com/adamwalach/go-robo-arm-demo/keys"
 	"github.com/kidoman/embd"
 	"github.com/kidoman/embd/controller/pca9685"
 	_ "github.com/kidoman/embd/host/rpi"
