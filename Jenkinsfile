@@ -34,7 +34,7 @@ node {
    stage 'Tests'
      dir ("${env.PROJECT_PATH}") {
        sh '''
-         gometalinter --vendor --fast --disable "gotype dupl"
+         gometalinter --vendor --fast --disable="gotype dupl"
        '''
      }
 
