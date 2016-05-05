@@ -1,4 +1,4 @@
-package main
+package keys
 
 import (
 	"github.com/pkg/term"
@@ -17,7 +17,8 @@ const (
 	AsciiD   int = 100
 )
 
-func getChar() (ascii int, keyCode int, err error) {
+//GetChar reads pressed key
+func GetChar() (ascii int, keyCode int, err error) {
 	t, _ := term.Open("/dev/tty")
 	term.RawMode(t)
 	bytes := make([]byte, 3)

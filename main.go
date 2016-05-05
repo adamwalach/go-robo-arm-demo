@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 
+	ctl "github.com/adamwalach/go-robo-arm-demo/servoctl"
+	keys "github.com/adamwalach/go-robo-arm-demo/servoctl"
 	"github.com/kidoman/embd"
 	"github.com/kidoman/embd/controller/pca9685"
 	_ "github.com/kidoman/embd/host/rpi"
@@ -22,25 +24,25 @@ func main() {
 	d.Freq = 60
 	defer d.Close()
 
-	vertCtl := NewController(
+	vertCtl := ctl.NewController(
 		servo.New(d.ServoChannel(2)),
-		CtlSettings{
+		ctl.CtlSettings{
 			Value: 85,
 			Step:  1,
 			Max:   175,
 			Min:   1,
 		})
-	horCtl := NewController(
+	horCtl := ctl.NewController(
 		servo.New(d.ServoChannel(3)),
-		CtlSettings{
+		ctl.CtlSettings{
 			Value: 95,
 			Step:  1,
 			Max:   200,
 			Min:   20,
 		})
-	gripCtl := NewController(
+	gripCtl := ctl.NewController(
 		servo.New(d.ServoChannel(0)),
-		CtlSettings{
+		ctl.CtlSettings{
 			Value: 110,
 			Step:  1,
 			Max:   184,
@@ -48,25 +50,25 @@ func main() {
 		})
 
 	for {
-		ascii, keyCode, _ := getChar()
+		ascii, keyCode, _ := keys.GetChar()
 		fmt.Println("A: ", ascii, "C: ", keyCode)
 		switch ascii {
-		case AsciiEsc:
+		case keys.AsciiEsc:
 			return
-		case AsciiW:
+		case keys.AsciiW:
 			vertCtl.Inc()
-		case AsciiS:
+		case keys.AsciiS:
 			vertCtl.Dec()
-		case AsciiA:
+		case keys.AsciiA:
 			horCtl.Inc()
-		case AsciiD:
+		case keys.AsciiD:
 			horCtl.Dec()
 		}
 
 		switch keyCode {
-		case CodeUpArrow:
+		case keys.CodeUpArrow:
 			gripCtl.Inc()
-		case CodeDownArrow:
+		case keys.CodeDownArrow:
 			gripCtl.Dec()
 		}
 
