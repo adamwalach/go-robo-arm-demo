@@ -53,7 +53,7 @@ func (c *Controller) Dec() error {
 
 //Set sets servo value
 func (c *Controller) Set(value int) error {
-	if c.Settings.Value >= c.Settings.Min && c.Settings.Value <= c.Settings.Max {
+	if value >= c.Settings.Min && value <= c.Settings.Max {
 		c.Settings.Value = value
 		fmt.Println("Value: ", value)
 		c.Servo.SetAngle(c.Settings.Value)
