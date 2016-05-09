@@ -1,13 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 	"time"
 
 	log "github.com/Sirupsen/logrus"
-	keys "github.com/adamwalach/go-robo-arm-demo/keys"
 	ctl "github.com/adamwalach/go-robo-arm-demo/servoctl"
 	"github.com/gorilla/mux"
 	"github.com/kidoman/embd"
@@ -51,31 +49,31 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(output))
 }
 
-func keyboardHandler() {
-	for {
-		ascii, keyCode, _ := keys.GetChar()
-		fmt.Println("A: ", ascii, "C: ", keyCode)
-		switch ascii {
-		case keys.AsciiEsc:
-			return
-		case keys.AsciiW:
-			vertCtl.Inc()
-		case keys.AsciiS:
-			vertCtl.Dec()
-		case keys.AsciiA:
-			horCtl.Inc()
-		case keys.AsciiD:
-			horCtl.Dec()
-		}
-
-		switch keyCode {
-		case keys.CodeUpArrow:
-			gripCtl.Inc()
-		case keys.CodeDownArrow:
-			gripCtl.Dec()
-		}
-	}
-}
+// func keyboardHandler() {
+// 	for {
+// 		ascii, keyCode, _ := keys.GetChar()
+// 		fmt.Println("A: ", ascii, "C: ", keyCode)
+// 		switch ascii {
+// 		case keys.AsciiEsc:
+// 			return
+// 		case keys.AsciiW:
+// 			vertCtl.Inc()
+// 		case keys.AsciiS:
+// 			vertCtl.Dec()
+// 		case keys.AsciiA:
+// 			horCtl.Inc()
+// 		case keys.AsciiD:
+// 			horCtl.Dec()
+// 		}
+//
+// 		switch keyCode {
+// 		case keys.CodeUpArrow:
+// 			gripCtl.Inc()
+// 		case keys.CodeDownArrow:
+// 			gripCtl.Dec()
+// 		}
+// 	}
+// }
 
 func main() {
 
