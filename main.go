@@ -30,11 +30,7 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 
 	op := r.FormValue("operation")
 	servo := r.FormValue("servo")
-	v, err := strconv.Atoi(r.FormValue("value"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
+
 	output := ""
 
 	if op != "" {
@@ -61,6 +57,11 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 			output = "Error"
 		}
 	} else {
+		v, err := strconv.Atoi(r.FormValue("value"))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 		switch servo {
 		case "v":
 			vertCtl.Set(v)
