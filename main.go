@@ -28,6 +28,7 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 		"x-forwarded-for": r.Header.Get("X-Forwarded-For"),
 	}).Info("Scripts request")
 
+	op := r.FormValue("operation")
 	servo := r.FormValue("servo")
 	v, err := strconv.Atoi(r.FormValue("value"))
 	if err != nil {
@@ -35,15 +36,41 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	output := ""
-	switch servo {
-	case "v":
-		vertCtl.Set(v)
-	case "h":
-		horCtl.Set(v)
-	case "g":
-		gripCtl.Set(v)
-	default:
-		output = "Error"
+
+	if op != "" {
+		switch servo {
+		case "v":
+			if op == "i" {
+				vertCtl.Inc()
+			} else {
+				vertCtl.Dec()
+			}
+		case "h":
+			if op == "i" {
+				horCtl.Inc()
+			} else {
+				horCtl.Dec()
+			}
+		case "g":
+			if op == "i" {
+				gripCtl.Inc()
+			} else {
+				gripCtl.Dec()
+			}
+		default:
+			output = "Error"
+		}
+	} else {
+		switch servo {
+		case "v":
+			vertCtl.Set(v)
+		case "h":
+			horCtl.Set(v)
+		case "g":
+			gripCtl.Set(v)
+		default:
+			output = "Error"
+		}
 	}
 
 	w.Write([]byte(output))
