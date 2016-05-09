@@ -1,18 +1,61 @@
 {
 	"ImportPath": "github.com/adamwalach/go-robo-arm-demo",
 	"GoVersion": "go1.6",
+	"GodepVersion": "v58",
 	"Deps": [
+		{
+			"ImportPath": "github.com/Sirupsen/logrus",
+			"Comment": "v0.10.0",
+			"Rev": "4b6ea7319e214d98c938f12692336f7ca9348d6b"
+		},
 		{
 			"ImportPath": "github.com/golang/glog",
 			"Rev": "23def4e6c14b4da8ac2ed8007337bc5eb5007998"
+		},
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "1ea25387ff6f684839d82767c1733ff4d4d15d0a"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Comment": "v1.1",
+			"Rev": "0eeaf8392f5b04950925b8a69fe70f110fa7cbfc"
 		},
 		{
 			"ImportPath": "github.com/kidoman/embd",
 			"Rev": "bfcd1345fe4e3d17ca82475c0c2f3d53120f87a9"
 		},
 		{
+			"ImportPath": "github.com/kidoman/embd/controller/pca9685",
+			"Rev": "bfcd1345fe4e3d17ca82475c0c2f3d53120f87a9"
+		},
+		{
+			"ImportPath": "github.com/kidoman/embd/host/generic",
+			"Rev": "bfcd1345fe4e3d17ca82475c0c2f3d53120f87a9"
+		},
+		{
+			"ImportPath": "github.com/kidoman/embd/host/rpi",
+			"Rev": "bfcd1345fe4e3d17ca82475c0c2f3d53120f87a9"
+		},
+		{
+			"ImportPath": "github.com/kidoman/embd/motion/servo",
+			"Rev": "bfcd1345fe4e3d17ca82475c0c2f3d53120f87a9"
+		},
+		{
+			"ImportPath": "github.com/kidoman/embd/util",
+			"Rev": "bfcd1345fe4e3d17ca82475c0c2f3d53120f87a9"
+		},
+		{
 			"ImportPath": "github.com/pkg/term",
 			"Rev": "9eb92a42e2b9dd9bc2bdb0a1d0f085c49233b6d4"
+		},
+		{
+			"ImportPath": "github.com/pkg/term/termios",
+			"Rev": "9eb92a42e2b9dd9bc2bdb0a1d0f085c49233b6d4"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "b776ec39b3e54652e09028aaaaac9757f4f8211a"
 		}
 	]
 }
