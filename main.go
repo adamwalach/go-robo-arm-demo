@@ -120,7 +120,7 @@ func main() {
 		servo.New(d.ServoChannel(2)),
 		ctl.CtlSettings{
 			Value: 85,
-			Step:  1,
+			Step:  4,
 			Max:   175,
 			Min:   1,
 		})
@@ -128,7 +128,7 @@ func main() {
 		servo.New(d.ServoChannel(3)),
 		ctl.CtlSettings{
 			Value: 95,
-			Step:  1,
+			Step:  4,
 			Max:   200,
 			Min:   20,
 		})
@@ -136,7 +136,7 @@ func main() {
 		servo.New(d.ServoChannel(0)),
 		ctl.CtlSettings{
 			Value: 110,
-			Step:  1,
+			Step:  4,
 			Max:   184,
 			Min:   105,
 		})
