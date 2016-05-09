@@ -2,14 +2,53 @@ package main
 
 import (
 	"fmt"
+	"net/http"
+	"strconv"
 
-	ctl "github.com/adamwalach/go-robo-arm-demo/servoctl"
+	log "github.com/Sirupsen/logrus"
 	keys "github.com/adamwalach/go-robo-arm-demo/keys"
+	ctl "github.com/adamwalach/go-robo-arm-demo/servoctl"
+	"github.com/gorilla/mux"
 	"github.com/kidoman/embd"
 	"github.com/kidoman/embd/controller/pca9685"
 	_ "github.com/kidoman/embd/host/rpi"
 	"github.com/kidoman/embd/motion/servo"
 )
+
+var (
+	vertCtl *ctl.Controller
+	horCtl  *ctl.Controller
+	gripCtl *ctl.Controller
+)
+
+func apiHandler(w http.ResponseWriter, r *http.Request) {
+	log.WithFields(log.Fields{
+		"handler":         "urlHandler",
+		"query":           r.URL.Query(),
+		"ip":              r.RemoteAddr,
+		"x-forwarded-for": r.Header.Get("X-Forwarded-For"),
+	}).Info("Scripts request")
+
+	servo := r.FormValue("servo")
+	v, err := strconv.Atoi(r.FormValue("value"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	output := ""
+	switch servo {
+	case "v":
+		vertCtl.Set(v)
+	case "h":
+		horCtl.Set(v)
+	case "g":
+		gripCtl.Set(v)
+	default:
+		output = "Error"
+	}
+
+	w.Write([]byte(output))
+}
 
 func main() {
 
@@ -24,7 +63,7 @@ func main() {
 	d.Freq = 60
 	defer d.Close()
 
-	vertCtl := ctl.NewController(
+	vertCtl = ctl.NewController(
 		servo.New(d.ServoChannel(2)),
 		ctl.CtlSettings{
 			Value: 85,
@@ -32,7 +71,7 @@ func main() {
 			Max:   175,
 			Min:   1,
 		})
-	horCtl := ctl.NewController(
+	horCtl = ctl.NewController(
 		servo.New(d.ServoChannel(3)),
 		ctl.CtlSettings{
 			Value: 95,
@@ -40,7 +79,7 @@ func main() {
 			Max:   200,
 			Min:   20,
 		})
-	gripCtl := ctl.NewController(
+	gripCtl = ctl.NewController(
 		servo.New(d.ServoChannel(0)),
 		ctl.CtlSettings{
 			Value: 110,
@@ -48,6 +87,10 @@ func main() {
 			Max:   184,
 			Min:   105,
 		})
+
+	r := mux.NewRouter()
+	r.HandleFunc("/api", apiHandler).Methods("GET")
+	go http.ListenAndServe(":3000", r)
 
 	for {
 		ascii, keyCode, _ := keys.GetChar()
