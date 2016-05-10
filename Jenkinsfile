@@ -44,6 +44,7 @@ node {
          ./build.sh
        '''
      }
+     
 
    stage 'Docker build'
      dir ("${env.PROJECT_PATH}") {
