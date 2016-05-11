@@ -68,11 +68,11 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		switch servo {
 		case "v":
-			vertCtl.Set(v)
+			vertCtl.SetSlow(v, 20)
 		case "h":
-			horCtl.Set(v)
+			horCtl.SetSlow(v, 20)
 		case "g":
-			gripCtl.Set(v)
+			gripCtl.SetSlow(v, 20)
 		default:
 			output = "Error"
 		}
