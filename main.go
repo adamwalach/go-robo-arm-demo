@@ -155,7 +155,7 @@ func main() {
 	vertCtl = ctl.NewController(
 		servo.New(d.ServoChannel(2)),
 		ctl.CtlSettings{
-			Value: 85,
+			Value: 1,
 			Step:  4,
 			Max:   115,
 			Min:   1,
