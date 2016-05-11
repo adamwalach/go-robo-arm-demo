@@ -3,6 +3,7 @@ package servoctl
 import (
 	"errors"
 	"fmt"
+	"time"
 
 	"github.com/kidoman/embd/motion/servo"
 )
@@ -27,7 +28,7 @@ func NewController(servo *servo.Servo, settings CtlSettings) *Controller {
 		Servo:    servo,
 		Settings: settings,
 	}
-	s.Set(settings.Value)
+	s.SetSlow(settings.Value, 20)
 	return s
 }
 
@@ -57,6 +58,31 @@ func (c *Controller) Set(value int) error {
 		c.Settings.Value = value
 		fmt.Println("Value: ", value)
 		c.Servo.SetAngle(c.Settings.Value)
+		return nil
+	}
+	return errors.New("Unable to set value")
+}
+
+//SetSlow sets value with delay
+func (c *Controller) SetSlow(value, delay int) error {
+	if value > c.Settings.Value {
+		for x := c.Settings.Value; x <= value; x++ {
+			err := c.Set(x)
+			if err != nil {
+				return err
+			}
+			time.Sleep(time.Millisecond * time.Duration(delay))
+		}
+		return nil
+	}
+	if value < c.Settings.Value {
+		for x := c.Settings.Value; x >= value; x-- {
+			err := c.Set(x)
+			if err != nil {
+				return err
+			}
+			time.Sleep(time.Millisecond * time.Duration(delay))
+		}
 		return nil
 	}
 	return errors.New("Unable to set value")

@@ -103,6 +103,23 @@ func apiHandler(w http.ResponseWriter, r *http.Request) {
 // 	}
 // }
 
+func demo() {
+	vertCtl.SetSlow(vertCtl.Settings.Max, 20)
+	vertCtl.SetSlow(vertCtl.Settings.Min, 20)
+	vertCtl.SetSlow(vertCtl.Settings.Min+30, 20)
+
+	horCtl.SetSlow(horCtl.Settings.Min, 10)
+	horCtl.SetSlow(horCtl.Settings.Max, 10)
+	horCtl.SetSlow(90, 10)
+
+	gripCtl.SetSlow(gripCtl.Settings.Min, 5)
+	gripCtl.SetSlow(gripCtl.Settings.Max, 5)
+	gripCtl.SetSlow(gripCtl.Settings.Min, 5)
+	gripCtl.SetSlow(gripCtl.Settings.Max, 5)
+
+	gripCtl.SetSlow(110, 5)
+}
+
 func main() {
 
 	if err := embd.InitI2C(); err != nil {
@@ -129,7 +146,7 @@ func main() {
 		ctl.CtlSettings{
 			Value: 95,
 			Step:  4,
-			Max:   200,
+			Max:   170,
 			Min:   20,
 		})
 	gripCtl = ctl.NewController(
@@ -140,7 +157,7 @@ func main() {
 			Max:   184,
 			Min:   105,
 		})
-
+	demo()
 	r := mux.NewRouter()
 	r.HandleFunc("/api", apiHandler).Methods("GET")
 	go http.ListenAndServe(":3000", r)
