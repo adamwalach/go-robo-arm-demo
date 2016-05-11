@@ -124,7 +124,7 @@ func demo() {
 	gripCtl.SetSlow(110, 5)
 }
 
-func captureCtrlC(d string) {
+func captureCtrlC(d *pca9685.PCA9685) {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt)
 	signal.Notify(c, syscall.SIGTERM)
