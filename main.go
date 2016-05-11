@@ -157,7 +157,7 @@ func main() {
 		ctl.CtlSettings{
 			Value: 85,
 			Step:  4,
-			Max:   175,
+			Max:   115,
 			Min:   1,
 		})
 	horCtl = ctl.NewController(
