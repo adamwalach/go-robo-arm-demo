@@ -12,6 +12,5 @@
         state: started
         command: /main
         pull: always
-        restart_policy: no
         privileged: true
         ports: 0.0.0.0:3000:3000
