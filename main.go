@@ -163,7 +163,7 @@ func main() {
 	horCtl = ctl.NewController(
 		servo.New(d.ServoChannel(3)),
 		ctl.CtlSettings{
-			Value: 95,
+			Value: 90,
 			Step:  4,
 			Max:   170,
 			Min:   20,
