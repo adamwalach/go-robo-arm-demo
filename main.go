@@ -116,6 +116,8 @@ func demo() {
 	horCtl.SetSlow(horCtl.Settings.Max, 10)
 	horCtl.SetSlow(90, 10)
 
+	vertCtl.SetSlow(vertCtl.Settings.Min+80, 20)
+
 	gripCtl.SetSlow(gripCtl.Settings.Min, 5)
 	gripCtl.SetSlow(gripCtl.Settings.Max, 5)
 	gripCtl.SetSlow(gripCtl.Settings.Min, 5)
