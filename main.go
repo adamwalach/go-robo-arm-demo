@@ -133,7 +133,7 @@ func main() {
 			Min:   20,
 		})
 	gripCtl = ctl.NewController(
-		servo.New(d.ServoChannel(12)),
+		servo.New(d.ServoChannel(0)),
 		ctl.CtlSettings{
 			Value: 110,
 			Step:  4,
