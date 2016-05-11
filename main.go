@@ -1,8 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
+	"os"
+	"os/signal"
 	"strconv"
+	"syscall"
 	"time"
 
 	log "github.com/Sirupsen/logrus"
@@ -120,6 +124,20 @@ func demo() {
 	gripCtl.SetSlow(110, 5)
 }
 
+func captureCtrlC(d string) {
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt)
+	signal.Notify(c, syscall.SIGTERM)
+	go func() {
+		for sig := range c {
+			fmt.Println(fmt.Sprintf("Captured '%v', exiting..", sig))
+			d.Close()
+			embd.CloseI2C()
+			os.Exit(1)
+		}
+	}()
+}
+
 func main() {
 
 	if err := embd.InitI2C(); err != nil {
@@ -132,6 +150,7 @@ func main() {
 	d := pca9685.New(bus, 0x40)
 	d.Freq = 60
 	defer d.Close()
+	captureCtrlC(d)
 
 	vertCtl = ctl.NewController(
 		servo.New(d.ServoChannel(2)),
