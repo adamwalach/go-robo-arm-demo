@@ -124,6 +124,8 @@ func demo() {
 	gripCtl.SetSlow(gripCtl.Settings.Max, 5)
 
 	gripCtl.SetSlow(110, 5)
+
+	vertCtl.SetSlow(vertCtl.Settings.Min+30, 20)
 }
 
 func captureCtrlC(d *pca9685.PCA9685) {
