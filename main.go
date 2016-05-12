@@ -184,7 +184,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/api", apiHandler).Methods("GET")
 	go http.ListenAndServe(":3000", r)
-
+	fmt.Println("sdds")
 	for {
 		time.Sleep(time.Second)
 	}
