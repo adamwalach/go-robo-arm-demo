@@ -180,6 +180,7 @@ func main() {
 			Max:   184,
 			Min:   105,
 		})
+
 	demo()
 	r := mux.NewRouter()
 	r.HandleFunc("/api", apiHandler).Methods("GET")
