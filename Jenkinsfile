@@ -35,6 +35,7 @@ node {
      dir ("${env.PROJECT_PATH}") {
        sh '''
          #gometalinter --vendor --fast --disable gotype --disable dupl
+         env
        '''
      }
 
@@ -44,7 +45,6 @@ node {
          ./build.sh
        '''
      }
-     
 
    stage 'Docker build'
      dir ("${env.PROJECT_PATH}") {
