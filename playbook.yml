@@ -1,0 +1,16 @@
+---
+- hosts: 'pi-v2'
+  tasks:
+    - shell: "docker stop $(docker ps -a -q) || true"
+    - shell: "docker rm $(docker ps -a -q) || true"
+    - shell: "docker rmi -f $(docker images -q --filter \"dangling=true\") || true"
+
+    - name: go-robo-arm-demo container
+      docker:
+        name: robo-arm
+        image: awalach/go-robo-arm-demo:master
+        state: started
+        command: /main
+        pull: always
+        privileged: true
+        ports: 3000
